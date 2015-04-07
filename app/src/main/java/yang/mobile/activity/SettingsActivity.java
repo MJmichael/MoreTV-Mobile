@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package yang.mobile;
+package yang.mobile.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.MenuItem;
-import android.widget.TextView;
+
+import yang.mobile.R;
 
 public class SettingsActivity extends ActionBarActivity {
 
@@ -27,17 +27,7 @@ public class SettingsActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_main);
 
-        TextView mTxtTitle = (TextView) findViewById(R.id.txtTitle);
-        mTxtTitle.setText(getString(R.string.settings));
-
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        finish();
-        return super.onOptionsItemSelected(item);
     }
 }

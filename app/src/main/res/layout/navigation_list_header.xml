@@ -30,7 +30,7 @@
         android:contentDescription="@string/clear"
         android:scaleType="fitXY" />
 
-    <yang.mobile.ui.RoundedImageView
+    <yang.mobile.widget.RoundedImageView
         android:id="@+id/userPhoto"
         android:layout_width="@dimen/userPhoto_layout_width"
         android:layout_height="@dimen/userPhoto_layout_height"
@@ -41,7 +41,7 @@
         android:layout_marginLeft="@dimen/userPhoto_layout_marginLeft"
         android:layout_marginTop="@dimen/userPhoto_layout_marginTop" />
 
-    <yang.mobile.ui.RoundedImageView
+    <yang.mobile.widget.RoundedImageView
         android:id="@+id/userPhotoTwo"
         android:layout_width="@dimen/userPhotoTwo_layout_width"
         android:layout_height="@dimen/userPhotoTwo_layout_height"
@@ -51,7 +51,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <yang.mobile.ui.RoundedImageView
+    <yang.mobile.widget.RoundedImageView
         android:id="@+id/userPhotoTree"
         android:layout_width="@dimen/userPhotoTree_layout_width"
         android:layout_height="@dimen/userPhotoTree_layout_height"

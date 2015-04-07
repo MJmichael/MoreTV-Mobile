@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package yang.mobile.ui;
+package yang.mobile.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;

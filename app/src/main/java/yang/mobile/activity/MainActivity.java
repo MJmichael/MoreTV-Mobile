@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package yang.mobile;
+package yang.mobile.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,18 +27,23 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import yang.mobile.R;
+import yang.mobile.Utils.ListUtils;
+import yang.mobile.activity.home.FragmentHome;
 import yang.mobile.interfaces.NavigationLiveoListener;
 import yang.mobile.navigationliveo.NavigationLiveo;
 
 public class MainActivity extends NavigationLiveo implements NavigationLiveoListener {
+    private static final String TEXT_FRAGMENT = "TEXT_FRAGMENT";
 
     public List<String> mListNameItem;
+    private static List<Class<? extends Fragment>> fragmentList = new ArrayList<>();
 
     @Override
     public void onUserInformation() {
         this.mUserName.setText("Rudson Lima");
         this.mUserEmail.setText("rudsonlive@gmail.com");
-        this.mUserPhoto.setImageResource(R.drawable.ic_rudsonlive);
+        this.mUserPhoto.setImageResource(R.drawable.ic_no_user);
         this.mUserBackground.setImageResource(R.drawable.ic_user_background);
     }
 
@@ -54,13 +59,16 @@ public class MainActivity extends NavigationLiveo implements NavigationLiveoList
 
         // name of the list items
         mListNameItem = new ArrayList<>();
-        mListNameItem.add(0, getString(R.string.inbox));
-        mListNameItem.add(1, getString(R.string.starred));
-        mListNameItem.add(2, getString(R.string.sent_mail));
-        mListNameItem.add(3, getString(R.string.drafts));
-        mListNameItem.add(4, getString(R.string.more_markers)); //This item will be a subHeader
-        mListNameItem.add(5, getString(R.string.trash));
-        mListNameItem.add(6, getString(R.string.spam));
+        mListNameItem.add(0, "直播");
+        mListNameItem.add(1, "热门推荐");
+        mListNameItem.add(2, "电视剧");
+        mListNameItem.add(3, "电影");
+        mListNameItem.add(4, "体育");
+        mListNameItem.add(5, "精选专题");
+        mListNameItem.add(6, "综艺");
+
+        fragmentList.add(FragmentHome.class);
+        fragmentList.add(FragmentHome.class);
 
         // icons list items
         List<Integer> mListIconItem = new ArrayList<>();
@@ -68,7 +76,7 @@ public class MainActivity extends NavigationLiveo implements NavigationLiveoList
         mListIconItem.add(1, R.drawable.ic_star_black_24dp); //Item no icon set 0
         mListIconItem.add(2, R.drawable.ic_send_black_24dp); //Item no icon set 0
         mListIconItem.add(3, R.drawable.ic_drafts_black_24dp);
-        mListIconItem.add(4, 0); //When the item is a subHeader the value of the icon 0
+        mListIconItem.add(4, R.drawable.ic_send_black_24dp); //When the item is a subHeader the value of the icon 0
         mListIconItem.add(5, R.drawable.ic_delete_black_24dp);
         mListIconItem.add(6, R.drawable.ic_report_black_24dp);
 
@@ -85,36 +93,45 @@ public class MainActivity extends NavigationLiveo implements NavigationLiveoList
         //If not please use the FooterDrawer use the setFooterVisible(boolean visible) method with value false
         this.setFooterInformationDrawer(R.string.settings, R.drawable.ic_settings_black_24dp);
 
-        this.setNavigationAdapter(mListNameItem, mListIconItem, mListHeaderItem, mSparseCounterItem);
+        this.setNavigationAdapter(mListNameItem, mListIconItem);
     }
 
     @Override
     public void onItemClickNavigation(int position, int layoutContainerId) {
-
         FragmentManager mFragmentManager = getSupportFragmentManager();
-
-        Fragment mFragment = new FragmentMain().newInstance(mListNameItem.get(position));
-
-        if (mFragment != null){
-            mFragmentManager.beginTransaction().replace(layoutContainerId, mFragment).commit();
+        if (position == getCurrentPosition() &&
+                ListUtils.size(mFragmentManager.getFragments()) > 0) {
+            return;
         }
+
+        Class fragmentClass = fragmentList.get(position);
+        String tag = fragmentClass.getName();
+        Fragment mFragment = mFragmentManager.findFragmentByTag(tag);
+        if (mFragment == null) {
+            Bundle mBundle = new Bundle();
+            mBundle.putString(TEXT_FRAGMENT, mListNameItem.get(position));
+            mFragment = Fragment.instantiate(getApplicationContext(),
+                    fragmentList.get(position).getName(), mBundle);
+        }
+        mFragmentManager.beginTransaction().replace(layoutContainerId, mFragment,
+                mFragment.getClass().getName()).commit();
     }
 
     @Override
     public void onPrepareOptionsMenuNavigation(Menu menu, int position, boolean visible) {
-
-        //hide the menu when the navigation is opens
-        switch (position) {
-            case 0:
-                menu.findItem(R.id.menu_add).setVisible(!visible);
-                menu.findItem(R.id.menu_search).setVisible(!visible);
-                break;
-
-            case 1:
-                menu.findItem(R.id.menu_add).setVisible(!visible);
-                menu.findItem(R.id.menu_search).setVisible(!visible);
-                break;
-        }
+//
+//        //hide the menu when the navigation is opens
+//        switch (position) {
+//            case 0:
+//                menu.findItem(R.id.menu_add).setVisible(!visible);
+//                menu.findItem(R.id.menu_search).setVisible(!visible);
+//                break;
+//
+//            case 1:
+//                menu.findItem(R.id.menu_add).setVisible(!visible);
+//                menu.findItem(R.id.menu_search).setVisible(!visible);
+//                break;
+//        }
     }
 
     @Override

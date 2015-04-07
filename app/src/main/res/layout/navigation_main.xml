@@ -36,7 +36,7 @@
         <include layout="@layout/navigation_container" />
     </LinearLayout>
 
-    <yang.mobile.ui.ScrimInsetsFrameLayout
+    <yang.mobile.widget.ScrimInsetsFrameLayout
         android:id="@+id/relativeDrawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -47,5 +47,5 @@
         <include
             android:fitsSystemWindows="true"
             layout="@layout/navigation_list_drawer" />
-    </yang.mobile.ui.ScrimInsetsFrameLayout>
+    </yang.mobile.widget.ScrimInsetsFrameLayout>
 </android.support.v4.widget.DrawerLayout>

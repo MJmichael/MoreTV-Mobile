@@ -66,7 +66,7 @@ public abstract class NavigationLiveo extends ActionBarActivity {
 
     private int mColorDefault = 0;
     private int mColorSelected = 0;
-    private int mCurrentPosition = 1;
+    private int mCurrentPosition = 0;
     private int mNewSelector = 0;
     private boolean mRemoveAlpha = false;
     private boolean mRemoveSelector = false;
@@ -113,7 +113,7 @@ public abstract class NavigationLiveo extends ActionBarActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
 
         mDrawerToggle = new ActionBarDrawerToggleCompat(this, mDrawerLayout, mToolbar);
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
+//        mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         mTitleFooter = (TextView) this.findViewById(R.id.titleFooter);
         mIconFooter = (ImageView) this.findViewById(R.id.iconFooter);
@@ -171,7 +171,7 @@ public abstract class NavigationLiveo extends ActionBarActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(mRelativeDrawer);
-    	mNavigationListener.onPrepareOptionsMenuNavigation(menu, mCurrentPosition, drawerOpen);
+//    	mNavigationListener.onPrepareOptionsMenuNavigation(menu, mCurrentPosition, drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 

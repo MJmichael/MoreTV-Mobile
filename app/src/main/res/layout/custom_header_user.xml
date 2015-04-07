@@ -19,7 +19,7 @@
     android:layout_height="189dp"
     android:background="@color/nliveo_cyan_colorPrimary">
 
-    <yang.mobile.ui.RoundedImageView
+    <yang.mobile.widget.RoundedImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:gravity="center"
